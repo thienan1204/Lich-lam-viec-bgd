@@ -1,0 +1,5 @@
+{
+  "name": "Trợ lý Lịch Ban Giám đốc",
+  "description": "Một ứng dụng trợ lý AI để quản lý và truy vấn lịch làm việc của Ban Giám đốc Công an tỉnh, sử dụng Gemini API để phân tích cú pháp và trả lời các câu hỏi bằng ngôn ngữ tự nhiên.",
+  "requestFramePermissions": []
+}

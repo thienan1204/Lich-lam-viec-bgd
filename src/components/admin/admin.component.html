@@ -1,0 +1,46 @@
+
+<div class="p-4 md:p-6 bg-white dark:bg-slate-800 rounded-lg shadow-md h-full flex flex-col">
+  <h2 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Cập nhật Lịch làm việc từ JSON</h2>
+  <p class="text-slate-600 dark:text-slate-400 mb-4">
+    Dán nội dung lịch làm việc dưới dạng chuỗi JSON vào ô bên dưới. Dữ liệu sẽ được lưu trữ và sử dụng cho việc tra cứu.
+  </p>
+  
+  <div class="flex-grow flex flex-col">
+    <textarea 
+      class="w-full flex-grow p-3 border border-slate-300 dark:border-slate-600 rounded-md bg-slate-50 dark:bg-slate-700 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-150 ease-in-out text-sm font-mono"
+      placeholder="Dán chuỗi JSON lịch làm việc tại đây..."
+      [ngModel]="scheduleJson()"
+      (ngModelChange)="scheduleJson.set($event)">
+    </textarea>
+  </div>
+  
+  <div class="mt-4 flex items-center justify-between">
+    <div class="h-6">
+      @if (lastUpdateSuccessful() === true) {
+        <span class="text-green-600 dark:text-green-400 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+          Cập nhật lịch thành công!
+        </span>
+      } @else if (lastUpdateSuccessful() === false) {
+        <span class="text-red-600 dark:text-red-400 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>
+          Cập nhật thất bại. Vui lòng kiểm tra định dạng JSON.
+        </span>
+      }
+    </div>
+    <button 
+      (click)="updateScheduleFromJson()"
+      [disabled]="isLoading() || !scheduleJson().trim()"
+      class="inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:bg-slate-400 disabled:cursor-not-allowed transition duration-150 ease-in-out">
+      @if (isLoading()) {
+        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Đang lưu...</span>
+      } @else {
+        <span>Lưu và Cập nhật</span>
+      }
+    </button>
+  </div>
+</div>

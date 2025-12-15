@@ -1,0 +1,55 @@
+
+<div class="flex flex-col h-full bg-white dark:bg-slate-800 rounded-lg shadow-md overflow-hidden">
+  <!-- Chat messages -->
+  <div #chatContainer class="flex-1 p-4 md:p-6 space-y-4 overflow-y-auto">
+    @for (message of chatHistory(); track $index) {
+      <div class="flex" [class.justify-end]="message.sender === 'user'" [class.justify-start]="message.sender === 'ai'">
+        <div 
+          class="max-w-lg lg:max-w-2xl px-4 py-2 rounded-lg"
+          [class.bg-primary-600]="message.sender === 'user'"
+          [class.text-white]="message.sender === 'user'"
+          [class.bg-slate-200]="message.sender === 'ai'"
+          [class.dark:bg-slate-700]="message.sender === 'ai'"
+          [class.text-slate-800]="message.sender === 'ai'"
+          [class.dark:text-slate-100]="message.sender === 'ai'">
+
+          @if (message.isTyping) {
+            <div class="flex items-center space-x-1">
+              <span class="block w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+              <span class="block w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+              <span class="block w-2 h-2 bg-slate-400 rounded-full animate-bounce"></span>
+            </div>
+          } @else {
+            <p class="text-sm whitespace-pre-wrap">{{ message.text }}</p>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Chat input -->
+  <div class="p-4 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-700">
+    <form (submit)="sendMessage()">
+       <div class="flex items-center space-x-3">
+        <input 
+          type="text"
+          placeholder="Nhập câu hỏi của đồng chí..."
+          class="flex-1 p-2 border border-slate-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-150 ease-in-out"
+          [ngModel]="userQuery()"
+          (ngModelChange)="userQuery.set($event)"
+          [ngModelOptions]="{standalone: true}"
+          [disabled]="isLoading()"
+          autocomplete="off">
+
+        <button 
+          type="submit"
+          [disabled]="isLoading() || !userQuery().trim()"
+          class="inline-flex items-center justify-center h-10 w-10 rounded-full text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:bg-slate-400 disabled:cursor-not-allowed transition duration-150 ease-in-out">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
