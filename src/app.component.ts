@@ -38,5 +38,6 @@ export class AppComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
+    this.activeTab.set('chat');
   }
 }

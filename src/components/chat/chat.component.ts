@@ -3,13 +3,14 @@ import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, input, 
 import { FormsModule } from '@angular/forms';
 import { ChatMessage, ScheduleEntry } from '../../models';
 import { GeminiService } from '../../services/gemini.service';
+import { SafeHtmlPipe } from '../../pipes/safe-html.pipe';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [FormsModule]
+  imports: [FormsModule, SafeHtmlPipe]
 })
 export class ChatComponent {
   scheduleData = input.required<ScheduleEntry[]>();
