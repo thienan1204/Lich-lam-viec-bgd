@@ -3,7 +3,34 @@
   "version": "1.0.0",
   "private": true,
   "description": "Một ứng dụng trợ lý AI để quản lý và truy vấn lịch làm việc của Ban Giám đốc Công an tỉnh, sử dụng Gemini API để phân tích cú pháp và trả lời các câu hỏi bằng ngôn ngữ tự nhiên.",
+  
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",  // Vercel sẽ chạy: npm run build => ng build
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "dependencies": {
+    // Các gói Angular cốt lõi (ví dụ)
+    "@angular/animations": "^17.3.0",
+    "@angular/common": "^17.3.0",
+    "@angular/compiler": "^17.3.0",
+    "@angular/core": "^17.3.0",
+    "@angular/forms": "^17.3.0",
+    "@angular/platform-browser": "^17.3.0",
+    "@angular/platform-browser-dynamic": "^17.3.0",
+    "@angular/router": "^17.3.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.3"
+  },
   "devDependencies": {
-    "typescript": "^5.9.0"
+    // Các gói phát triển, bao gồm Angular CLI
+    "@angular-devkit/build-angular": "^17.3.0",
+    "@angular/cli": "^17.3.0", // BẮT BUỘC để lệnh "ng" hoạt động
+    "@angular/compiler-cli": "^17.3.0",
+    "typescript": "~5.4.0" // Tôi đã điều chỉnh lại một chút để đảm bảo tính tương thích với Angular 17
+    // ... các devDependencies khác của bạn
   }
 }
